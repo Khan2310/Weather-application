@@ -19,8 +19,12 @@ inputLocationText.addEventListener("keyup", func => {
   }
 });
 
+function clearInputField() {
+  inputLocationText.value = "";
+}
+
 function requestWeatherInfo() {
-  if(document.getElementById("0")){
+  if (document.getElementById("0")) {
     this.removeElement();
   }
 
@@ -39,12 +43,13 @@ function requestWeatherInfo() {
 }
 
 function errorMsg(err) {
-    let tagP = document.createElement("P");
-    tagP.className = "error";
-    tagP.id = "0";
-    let textNode = document.createTextNode(err);
-    showWeatherResult.appendChild(tagP);
-    tagP.appendChild(textNode);
+  let tagP = document.createElement("P");
+  tagP.className = "error";
+  tagP.id = "0";
+  let textNode = document.createTextNode(err);
+  showWeatherResult.appendChild(tagP);
+  tagP.appendChild(textNode);
+  clearInputField();
 }
 
 function showWeatherForcast(forcast) {
@@ -57,24 +62,32 @@ function showWeatherForcast(forcast) {
   let humidity = `Humidity :  ${forcast.current.humidity}%`;
   let windkph = `Wind :  ${forcast.current.wind_kph} km/h`;
 
-  var dataSet = [location, locationTime, condition, temperature, humidity, windkph];
+  var dataSet = [
+    location,
+    locationTime,
+    condition,
+    temperature,
+    humidity,
+    windkph
+  ];
 
-  appendData = (dataSet) => {
-    dataSet.map((item,idx)=>{
+  appendData = dataSet => {
+    dataSet.map((item, idx) => {
       let tagP = document.createElement("P");
       tagP.id = idx;
-      tagP.className = "weather-data"+idx;
+      tagP.className = "weather-data" + idx;
       let textNode = document.createTextNode(item);
       showWeatherResult.appendChild(tagP);
       tagP.appendChild(textNode);
-    })
-  }
+    });
+  };
   appendData(dataSet);
+  clearInputField();
 }
 
 removeElement = () => {
-    container = document.getElementById("show-weather-result");
-    while(container.childNodes.length != 0){
-      container.removeChild(container.childNodes[0]);
-    }
-}
+  container = document.getElementById("show-weather-result");
+  while (container.childNodes.length != 0) {
+    container.removeChild(container.childNodes[0]);
+  }
+};
