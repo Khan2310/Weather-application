@@ -2,7 +2,7 @@ const getWeatherButton = document.querySelector(".get-weather-button");
 const inputLocationText = document.querySelector(".input-location-text");
 const showWeatherResult = document.getElementById("show-weather-result");
 
-const BASEURL = "http://api.apixu.com/v1";
+const BASEURL = "https://api.apixu.com/v1";
 const KEY = "0059b84ab2ae4899afa52938190303";
 
 getWeatherButton.addEventListener("click", func => {
