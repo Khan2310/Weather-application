@@ -20,6 +20,10 @@ inputLocationText.addEventListener("keyup", func => {
 });
 
 function requestWeatherInfo() {
+  if(document.getElementById("0")){
+    this.removeElement();
+  }
+
   const LOCATION = inputLocationText.value;
   fetch(`${BASEURL}/forecast.json?key=${KEY}&q=${LOCATION}&days=${5}`)
     .then(response => {
@@ -30,16 +34,17 @@ function requestWeatherInfo() {
     })
     .then(forcast => showWeatherForcast(forcast))
     .catch(err => {
-      console.log(err,"catch error");
+      console.log(err, "catch error");
     });
 }
 
 function errorMsg(err) {
-  let tagP = document.createElement("P");
-  tagP.className = "error";
-  let textNode = document.createTextNode(err);
-  showWeatherResult.appendChild(tagP);
-  tagP.appendChild(textNode);
+    let tagP = document.createElement("P");
+    tagP.className = "error";
+    tagP.id = "0";
+    let textNode = document.createTextNode(err);
+    showWeatherResult.appendChild(tagP);
+    tagP.appendChild(textNode);
 }
 
 function showWeatherForcast(forcast) {
@@ -52,20 +57,24 @@ function showWeatherForcast(forcast) {
   let humidity = `Humidity :  ${forcast.current.humidity}%`;
   let windkph = `Wind :  ${forcast.current.wind_kph} km/h`;
 
-  setWeatherInfo(location, "weather-data");
-  setWeatherInfo(locationTime, "weather-data");
-  setWeatherInfo(condition, "weather-data");
-  setWeatherInfo(temperature, "weather-data");
-  setWeatherInfo(humidity, "weather-data");
-  setWeatherInfo(windkph, "weather-data");
+  var dataSet = [location, locationTime, condition, temperature, humidity, windkph];
 
-  function setWeatherInfo(weatherValue, className) {
-    let tagP = document.createElement("P");
-    tagP.className = className;
-    let textNode = document.createTextNode(weatherValue);
-    showWeatherResult.appendChild(tagP);
-    tagP.appendChild(textNode);
+  appendData = (dataSet) => {
+    dataSet.map((item,idx)=>{
+      let tagP = document.createElement("P");
+      tagP.id = idx;
+      tagP.className = "weather-data"+idx;
+      let textNode = document.createTextNode(item);
+      showWeatherResult.appendChild(tagP);
+      tagP.appendChild(textNode);
+    })
   }
+  appendData(dataSet);
+}
 
-  console.log(forcast);
+removeElement = () => {
+    container = document.getElementById("show-weather-result");
+    while(container.childNodes.length != 0){
+      container.removeChild(container.childNodes[0]);
+    }
 }
