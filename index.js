@@ -52,12 +52,12 @@ function showWeatherForcast(forcast) {
   let humidity = `Humidity :  ${forcast.current.humidity}%`;
   let windkph = `Wind :  ${forcast.current.wind_kph} km/h`;
 
-  setWeatherInfo(location, "location");
-  setWeatherInfo(locationTime, "dada");
-  setWeatherInfo(condition, "dada");
-  setWeatherInfo(temperature, "dada");
-  setWeatherInfo(humidity, "dada");
-  setWeatherInfo(windkph, "dada");
+  setWeatherInfo(location, "weather-data");
+  setWeatherInfo(locationTime, "weather-data");
+  setWeatherInfo(condition, "weather-data");
+  setWeatherInfo(temperature, "weather-data");
+  setWeatherInfo(humidity, "weather-data");
+  setWeatherInfo(windkph, "weather-data");
 
   function setWeatherInfo(weatherValue, className) {
     let tagP = document.createElement("P");
