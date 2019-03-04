@@ -26,6 +26,12 @@
   color: #40739e;
 }
 
+.error{
+  align-items: center;
+  margin: auto;
+  color: red;
+}
+
 .input-location-text{
   border: 1px solid #00a8ff;
   font-size: 15px;
